@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Valentine's Day! 💕</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ff6b9d 0%, #c06c84 50%, #f67280 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .heart {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 2rem;
+            animation: float 6s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            background: white;
+            padding: 2rem 1.5rem;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            z-index: 10;
+            animation: slideIn 0.8s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .big-heart {
+            font-size: 3.5rem;
+            animation: heartbeat 1.5s infinite;
+            margin-bottom: 0.5rem;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% {
+                transform: scale(1);
+            }
+            25% {
+                transform: scale(1.1);
+            }
+            50% {
+                transform: scale(1);
+            }
+        }
+
+        h1 {
+            color: #ff6b9d;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        .name {
+            color: #c06c84;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .message {
+            color: #555;
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .signature {
+            color: #888;
+            font-style: italic;
+            margin-top: 2rem;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #ff6b9d;
+            animation: confetti-fall 3s infinite ease-in;
+        }
+
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="big-heart">❤️</div>
+        <h1>Happy Valentine's Day!</h1>
+        <div class="name" id="personName">Friend</div>
+        <div class="message" id="personMessage">
+            Wishing you a wonderful Valentine's Day! 💕
+        </div>
+        <div class="signature">With love,<br>mStreet Investments 💖</div>
+    </div>
+
+    <script>
+        // Floating hearts background
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.textContent = '❤️';
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.animationDelay = Math.random() * 2 + 's';
+            heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
+            document.body.appendChild(heart);
+            
+            setTimeout(() => heart.remove(), 7000);
+        }
+
+        setInterval(createHeart, 500);
+
+        // Confetti
+        function createConfetti() {
+            const confetti = document.createElement('div');
+            confetti.className = 'confetti';
+            confetti.style.left = Math.random() * 100 + '%';
+            confetti.style.background = ['#ff6b9d', '#c06c84', '#f67280', '#ffd6e8'][Math.floor(Math.random() * 4)];
+            confetti.style.animationDelay = Math.random() * 2 + 's';
+            document.body.appendChild(confetti);
+            
+            setTimeout(() => confetti.remove(), 4000);
+        }
+
+        setInterval(createConfetti, 300);
+
+        // Get person from URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const person = urlParams.get('person');
+
+        // Messages for each person
+        const messages = {
+            'swastik': 'MStreet loves your energy! Between the gym sessions and the bike rides, we all really love your sense of humor. Hope your day is as smooth as a downhill cruise and full of reasons to keep us laughing. Stay chill!',
+            'sukriti': 'Sending some bright vibes your way! mStreet loves you because that pretty smile of yours is the ultimate office mood-lifter. Wishing you the happiest of birthdays and a year ahead that\'s just as effortless and lovely as you make everyone else\'s day feel!',
+            'ishpreet': 'To our favorite spark plug! mStreet loves you because you bring 110% energy to everything you do. Hope your day is packed with fun, laughter, and all the chaotic-good energy you bring to the team!',
+            'ranjit': 'To the guy with the biggest heart: mStreet loves you for being such a thoughtful and good human. We hope your day is as sweet as your favorite treats. Honestly, your look of pure admiration for a good dessert is the ultimate vibe check. Keep being you!',
+            'anjali': 'To the girl who always keeps it real mStreet loves you because you\'re 100% direct and 100% fun at the same time. Wishing you a day that\'s as effortless and awesome as you are.',
+            'vivek': 'Sending some well-deserved good energy your way! mStreet loves you because you\'re the heart of this team and the gold standard for hard work. Wishing you a day of great coffee, light workloads, and plenty of reasons to smile!',
+            'tanish': 'Sending some good energy to the guy behind the designs! mStreet loves your cool, calm vibe and your eye for the details. Hope your day is 100% stress-free and full of creative inspiration.',
+            'ronit': 'Sending our sincere respect your way. mStreet loves having you on the team because you are a true asset to our growth. Your dedication and steady approach set a benchmark for everyone else. We wish you a focused and rewarding day ahead.',
+            'sir': 'mStreet loves the path you have carved for us. Your visionary leadership and unwavering commitment are the blueprints of our success. You are the true architect of this team, and we are proud to be part of the legacy you are building. Wishing you a day as impactful as your vision.',
+            'nishita': 'mStreet loves the vibrant \'pink energy\' you bring to everything you touch! You have a way of finding the magic in the mundane and turning new thoughts into stories. We hope your day feels like an Imtiaz Ali movie—full of soul, fresh perspectives, and that beautiful \'Safarnama\' spirit. Keep dreaming in color!',
+            'ananya': 'mStreet loves your creative energy and your fearlessness. You make \'trying new things\' look like an art form. May your day be as colorful and unpredictable as your latest hobby. Stay curious and keep that spark alive!',
+            'megha': 'mStreet loves having your steady presence around. You have a great eye for detail and a way of making hard work look easy. May your day be as organized and productive as you are'
+        };
+
+        // Update page content
+        if (person && messages[person.toLowerCase()]) {
+            document.getElementById('personName').textContent = person.charAt(0).toUpperCase() + person.slice(1);
+            document.getElementById('personMessage').textContent = messages[person.toLowerCase()];
+        }
+
+        // Update page title
+        if (person) {
+            document.title = `Happy Valentine's Day ${person.charAt(0).toUpperCase() + person.slice(1)}! 💕`;
+        }
+    </script>
+</body>
+</html>
